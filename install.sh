@@ -105,11 +105,11 @@ main () {
 
         echo
         echo "Hint: Append the following line to your shell profile:"
-        echo "export PATH='${LATEST}':\$PATH"
+        echo 'export PATH="'${LATEST}'":$PATH'
     else
         echo
         echo "Hint: Append the following line to your shell profile:"
-        echo "export PATH='${INST}':\$PATH"
+        echo 'export PATH="'${INST}'":$PATH'
     fi
 
     # maybe ~/.local/bin exists and is writeable and does not have duckdb yet
@@ -128,7 +128,5 @@ main () {
     else
         echo "${INST}/duckdb"
     fi
-
-
 }
 main
