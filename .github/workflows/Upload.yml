@@ -45,9 +45,9 @@ jobs:
 
       - name: Upload
         env:
-          DUCKDB_INSTALL_S3_ENDPOINT: ${{ secrets.DUCKDB_INSTALL_S3_ENDPOINT }}
-          DUCKDB_INSTALL_S3_ID: ${{ secrets.DUCKDB_INSTALL_S3_ID }}
-          DUCKDB_INSTALL_S3_SECRET: ${{ secrets.DUCKDB_INSTALL_S3_SECRET }}
+          AWS_ENDPOINT_URL: ${{ secrets.DUCKDB_INSTALL_S3_ENDPOINT }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.DUCKDB_INSTALL_S3_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DUCKDB_INSTALL_S3_SECRET }}
 
         shell: bash
         run: |
