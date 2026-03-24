@@ -30,7 +30,7 @@ jobs:
     - name: Test install.ps1 on OSX
       shell: bash
       run: |
-        powershell -NoExit install.ps1
+        powershell -noexit "& ""install.ps1"""
 
   upload:
 #    needs: [test-linux, test-osx, test-windows]
