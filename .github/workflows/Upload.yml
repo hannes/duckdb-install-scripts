@@ -33,9 +33,11 @@ jobs:
     steps:
     - uses: actions/checkout@v6
   
-    - name: Test install.ps1 on OSX
+    - name: Test install.ps1 on Windows
       shell: bash
       run: |
+        pwd
+        ls
         powershell -noexit "& ""install.ps1"""
 
   upload:
