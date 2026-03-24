@@ -31,7 +31,7 @@ jobs:
   upload:
     needs: [test-linux, test-windows]
     runs-on: ubuntu-latest
-    if: github.repository == 'duckdb/duckdb' && github.ref == 'refs/heads/main'
+    if: github.repository == 'duckdb/duckdb-install-scripts' && github.ref == 'refs/heads/main'
 
     steps:
       - uses: actions/checkout@v6
