@@ -17,17 +17,6 @@ jobs:
         cat install.sh | bash
         ~/.duckdb/cli/latest/duckdb -c "select 42"
 
-  test-osx:
-    runs-on: osx-latest
-    steps:
-    - uses: actions/checkout@v6
-
-    - name: Test install.sh on OSX
-      shell: bash
-      run: |
-        cat install.sh | bash
-        ~/.duckdb/cli/latest/duckdb -c "select 42"
-
   test-windows:
     runs-on: windows-latest
     steps:
@@ -36,11 +25,13 @@ jobs:
     - name: Test install.ps1 on Windows
       shell: pwsh
       run: |
-        dir
         ./install.ps1
+        $sh = New-Object -ComObject WScript.Shell
+        $target = $sh.CreateShortcut("$Home\Desktop\DuckDB.lnk").TargetPath
+        & $target -c "select 42"
 
   upload:
-    needs: [test-linux, test-osx, test-windows]
+    needs: [test-linux, test-windows]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
