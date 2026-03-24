@@ -33,8 +33,7 @@ jobs:
         powershell -noexit "& ""install.ps1"""
 
   upload:
-#    needs: [test-linux, test-osx, test-windows]
-    needs: [test-linux]
+    needs: [test-linux, test-osx, test-windows]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
