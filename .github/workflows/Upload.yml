@@ -12,8 +12,8 @@ jobs:
     - name: Test install.sh on Linux
       shell: bash
       run: |
-        echo 'hello linux'
-
+        cat install.sh | bash
+        ~/.duckdb/cli/latest/duckdb -c "select 42"
 
   test-osx:
     runs-on: osx-latest
@@ -21,7 +21,8 @@ jobs:
     - name: Test install.sh on OSX
       shell: bash
       run: |
-        echo 'hello osx'
+        cat install.sh | bash
+        ~/.duckdb/cli/latest/duckdb -c "select 42"
 
   test-windows:
     runs-on: windows-latest
@@ -29,7 +30,7 @@ jobs:
     - name: Test install.ps1 on OSX
       shell: bash
       run: |
-        echo 'hello windows'
+        powershell -NoExit install.ps1
 
   upload:
 #    needs: [test-linux, test-osx, test-windows]
