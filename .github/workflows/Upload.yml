@@ -2,8 +2,6 @@ name: Upload install scripts
 on:
   push:
 
-env:
-  GH_TOKEN: ${{ secrets.DUCKDBLABS_BOT_TOKEN }}
 
 jobs:
   test-linux:
@@ -34,11 +32,24 @@ jobs:
     needs: [test-linux, test-windows]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install
+        shell: bash
+        run: pip install awscli
 
       - name: Upload
+        env:
+          DUCKDB_INSTALL_S3_ENDPOINT: ${{ secrets.DUCKDB_INSTALL_S3_ENDPOINT }}
+          DUCKDB_INSTALL_S3_ID: ${{ secrets.DUCKDB_INSTALL_S3_ID }}
+          DUCKDB_INSTALL_S3_SECRET: ${{ secrets.DUCKDB_INSTALL_S3_SECRET }}
+
         shell: bash
         run: |
-          ls -lah
-          echo 'hello upload'
+          aws s3 cp --dryrun install.sh s3://duckdb-install/
+          aws s3 cp --dryrun install.ps1 s3://duckdb-install/
